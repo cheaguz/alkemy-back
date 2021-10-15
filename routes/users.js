@@ -7,3 +7,12 @@ router.get('/', function(req, res, next) {
 });
 
 module.exports = router;
+
+
+
+/*   
+/POST LOGIN
+/POST REGISTER
+/POST CHANGEPASSWORD.
+
+*/

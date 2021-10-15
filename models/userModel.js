@@ -5,5 +5,9 @@ module.exports = {
       const [rows] = await db.pool.execute('select * from usuarios')
         console.log([rows])
         return [rows]
-    }
+    },
+    create : (data) => {
+      db.pool.query('INSERT INTO usuarios SET mail=?,password=?',[
+        data.mail,data.password]);
+    },
 }
