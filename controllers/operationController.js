@@ -19,3 +19,14 @@ module.exports = {
         res.json(response)
     }
 }
+
+
+
+/*  
+newOperation
+getAllOperations
+getEntry
+getEgress
+delete
+put 
+*/

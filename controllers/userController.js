@@ -12,3 +12,12 @@ module.exports = {
         res.json(req.body)
     }
 }
+
+
+
+/* 
+register ,
+login ,
+changePassword
+
+*/
