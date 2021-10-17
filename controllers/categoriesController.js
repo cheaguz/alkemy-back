@@ -3,20 +3,38 @@ const categoriesModel = require('../models/categoriesModel')
 
 module.exports = {
     getAll : async (req,res,next) =>{
-       const categories = await categoriesModel.getAll()
-       console.log(categories)
-       res.json({message : "Consulta exitosa",categorias : categories})
+        try {
+            const categories = await categoriesModel.getAll()
+            res.json({message : "Consulta exitosa",categorias : categories})
+        }catch(e){
+            res.json({message:"Hubo un error",type : e.code})
+        };
     },
     create : async(req,res,next) =>{
-       await categoriesModel.create(req.body)
-        res.json(req.body)
+        try{
+            const newCategory = await categoriesModel.create(req.body)
+            console.log(newCategory)
+            res.json({message : "Categoria creada con exito"})
+        }catch(e){
+            res.json({message:"Hubo un error",type : e.code})
+        }
     },
     delete : async(req,res,next) => {
-        await categoriesModel.delete(req.body);
-        res.json("Deleted")
+        try {
+            await categoriesModel.delete(req.body);
+            res.json({message : 'Categoria eliminada correctamente'})
+        }
+        catch(e){
+            res.json({message:"Hubo un error",type : e.code})
+        }
     },
     update : async(req,res,next) => {
-        await categoriesModel.update(req.body);
-        res.json('updated')
+        try{
+            await categoriesModel.update(req.body);
+            res.json({message : 'Categoria modificada correctamente'})
+        }
+        catch(e){
+            res.json({message:"Hubo un error",type : e.code})
+        }
     }
 }
