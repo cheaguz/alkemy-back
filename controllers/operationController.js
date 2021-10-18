@@ -3,8 +3,12 @@ const operationModel = require('../models/operationModel')
 
 module.exports = {
     create : async(req,res,next) =>{
-       await operationModel.create(req.body)
-        res.json({message : 'operacion exitosa',res:req.body})
+        try{
+            await operationModel.create(req.body)
+            res.json({message : 'operacion exitosa',res:req.body})
+        }catch(e){
+                res.json({message : "hubo un error"})
+            }
     },
     getAll : async ( req,res,next) =>{
         const data = await operationModel.getAll()
