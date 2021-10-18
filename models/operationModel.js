@@ -5,8 +5,8 @@ module.exports = {
       const [rows] = await db.pool.execute('select * from OPERACIONES')
         return [rows]
     }, 
-    create : (data) => {
-      db.pool.query('INSERT INTO OPERACIONES SET CONCEPTO=?,MONTO=?,ID_USUARIO=?,TIPO_OPERACION=?,CATEGORIA_ID=?',[
+    create : async (data) => {
+      await db.pool.query('INSERT INTO OPERACIONES SET CONCEPTO=?,MONTO=?,ID_USUARIO=?,TIPO_OPERACION=?,CATEGORIA_ID=?',[
         data.CONCEPTO,
         data.MONTO,
         data.ID_USUARIO,
