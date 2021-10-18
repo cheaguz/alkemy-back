@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const userRouter = require('./routes/userRouter')
 const operationRouter = require('./routes/operationRouter')
+const categoriesRouter = require('./routes/categoriesRoutes')
 
 var app = express();
 
@@ -22,8 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', userRouter);
-app.use('/operation' , operationRouter)
+app.use('/users', userRouter);;
+app.use('/operation' , operationRouter);
+app.use('/categories' , categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
