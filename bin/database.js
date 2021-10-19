@@ -1,25 +1,21 @@
 const mysql = require('mysql2/promise');
 
-  const connection =  mysql.createPool({
-      host : 'localhost',
-      user : 'root',
-      password : '',
-      database : 'alkemy',
-      connectionLimit : 10,
-      queueLimit : 0
-  });
- 
-connection.getConnection((err,con) =>{
-    console.log('err',err)
-    console.log('connect',con)
-})
+const connection = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'alkemy',
+    connectionLimit: 10,
+    queueLimit: 0
+});
 
-  module.exports.pool = connection
+
+module.exports.pool = connection
 
 
 
 
-  /*  
+/*  
     CREATE TABLE usuarios(
       id	  int(255) auto_increment not null,
       nombre	  varchar(100) not null,

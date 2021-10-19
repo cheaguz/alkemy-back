@@ -1,34 +1,32 @@
 const userModel = require('../models/userModel');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 
 module.exports = {
-    getAll : async (req,res,next) =>{
+
+    register: async (req, res, next) => {
         try {
-            const user = await userModel.getAll()
-            res.json({message : "consulta exitosa" , data : user})
-        }catch(e){
-            res.json({message : "Hubo un error" , data : e.code})
+            const newUser = await userModel.register({
+                mail: req.body.mail,
+                password: bcrypt.hashSync(req.body.password, 10)
+            });
+            res.json({message: "usuario creado con exito!"})
+        } catch (e) {
+            res.json({message: "Hubo un error",data: e.code})
         }
     },
-    register : async(req,res,next) =>{
-        try{
-           const newUser =  await userModel.create(req.body)
-            res.json(newUser)
-        }catch(e){
-                res.json({message: "Hubo un error" , data: e.code})  
-        }
-    },
-    login : async (req,res,next) =>{
-        try{
-            // req mail ,  req password
+    login: async (req, res, next) => {
+        try {
             const user = await userModel.login(req.body)
-            console.log('usuario',user['mail'])
-           
-            res.json({message : "Login exitoso" , data : user})
-        }catch(e){
-            res.json({message : "hubo un error"})
-            console.log(e)
-           
+            if (bcrypt.compareSync(req.body.password, user.password)) {
+                const token = jwt.sign({user : user.user},"123")
+                res.json({message: "Login exitoso", token:token})
+            } else {
+                res.json({message: "Usuario o contraseña erronea"})
+            }
+        } catch (e) {
+            res.json({message: "hubo un error"});
         }
     },
 
@@ -37,8 +35,7 @@ module.exports = {
 
 
 /* 
-register ,
-login ,
+
 changePassword
 
 */
