@@ -20,8 +20,8 @@ module.exports = {
         try {
             const user = await userModel.login(req.body)
             if (bcrypt.compareSync(req.body.password, user.password)) {
-                const token = jwt.sign({user : user.user},"123")
-                res.json({message: "Login exitoso", token:token})
+                const token = jwt.sign({user : user.mail,id : user.id },"123")
+                res.json({message: "Login exitoso", token:token,id : user.id})
             } else {
                 res.json({message: "Usuario o contraseña erronea"})
             }
