@@ -3,11 +3,12 @@ const operationModel = require('../models/operationModel')
 
 module.exports = {
     create : async(req,res,next) =>{
+        const id=23 //token
         try{
-            await operationModel.create(req.body)
+            await operationModel.create(req.body,id)
             res.json({message : 'operacion exitosa',res:req.body})
         }catch(e){
-                res.json({message : "hubo un error"})
+                res.json({message : "hubo un error",data: e})
             }
     },
     getAll : async ( req,res,next) =>{
@@ -15,13 +16,26 @@ module.exports = {
             res.json(data)   
     },
     getIngreso : async (req,res,next) =>{
-        const response = await operationModel.getIngreso()
+        const id = 23 //token
+        const response = await operationModel.getIngreso(id)
         res.json(response)
     },
     getEgreso : async (req,res,next) =>{
-        const response = await operationModel.getEgresos()
+        const id = 23 ;  //token
+        const response = await operationModel.getEgresos(id)
         res.json(response)
-    }
+    },
+    delete : async ( req, res, next) => {
+        const idOperation = 7;
+        const userId = 53 //token
+
+        try {
+            const deleted = await operationModel.delete(idOperation , userId)
+            res.json({message : "Deleted"})
+        }catch(e){
+            console.log(e)
+        }
+    },
 }
 
 

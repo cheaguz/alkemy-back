@@ -1,28 +1,40 @@
 const db = require('../bin/database');
 
 module.exports = {
-    getAll : async function () {
-      const [rows] = await db.pool.execute('select * from OPERACIONES WHERE ID_USUARIO = 1')
+    getAll : async function (id) {
+      `select * from OPERACIONES WHERE ID_USUARIO==`
+      const [rows] = await db.pool.execute(`select * from OPERACIONES WHERE ID_USUARIO==${id}`)
         return [rows]
     }, 
-    create : async (data) => {
+    create : async (data,id) => {
       await db.pool.query('INSERT INTO OPERACIONES SET CONCEPTO=?,MONTO=?,ID_USUARIO=?,TIPO_OPERACION=?,CATEGORIA_ID=?',[
         data.CONCEPTO,
         data.MONTO,
-        data.ID_USUARIO,
+        id,
         data.TIPO_OPERACION,
         data.CATEGORIA_ID,
     ]);
     },
-    getIngreso : async () => {
-        const [rows] = await db.pool.execute('select * from OPERACIONES where TIPO_OPERACION="INGRESO" && ID_USUARIO= 1')
+    getIngreso : async (id) => {
+        const [rows] = await db.pool.execute( `select * from OPERACIONES where TIPO_OPERACION="INGRESO" && ID_USUARIO=${id}`)
         return [rows]
     },
-    getEgresos : async () => {
-      const [rows] = await db.pool.execute('select * from OPERACIONES where TIPO_OPERACION="EGRESO" && ID_USUARIO= 1')
+    getEgresos : async (id) => {
+      const [rows] = await db.pool.execute(`select * from OPERACIONES where TIPO_OPERACION="EGRESO" && ID_USUARIO=${id}`)
       return [rows]
   },
+     delete : async (id,userId) => {
+      const query = await db.pool.query(`DELETE FROM OPERACIONES WHERE ID=${id} && ID_USUARIO=${userId}`) 
+        return query
+    
+      
+},
 }
 
+/*
+ ELIMINAR OPERACION
+ MODIFICAR OPERACION
+
+*/
 
 
