@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const jwt = require('jsonwebtoken');
+
 
 var indexRouter = require('./routes/index');
 const userRouter = require('./routes/userRouter')
@@ -10,6 +12,9 @@ const operationRouter = require('./routes/operationRouter')
 const categoriesRouter = require('./routes/categoriesRoutes')
 
 var app = express();
+
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -2,7 +2,7 @@ const db = require('../bin/database');
 
 module.exports = {
     getAll : async function () {
-      const [rows] = await db.pool.execute('select * from OPERACIONES')
+      const [rows] = await db.pool.execute('select * from OPERACIONES WHERE ID_USUARIO = 1')
         return [rows]
     }, 
     create : async (data) => {
@@ -15,11 +15,11 @@ module.exports = {
     ]);
     },
     getIngreso : async () => {
-        const [rows] = await db.pool.execute('select * from OPERACIONES where TIPO_OPERACION="INGRESO"')
+        const [rows] = await db.pool.execute('select * from OPERACIONES where TIPO_OPERACION="INGRESO" && ID_USUARIO= 1')
         return [rows]
     },
     getEgresos : async () => {
-      const [rows] = await db.pool.execute('select * from OPERACIONES where TIPO_OPERACION="EGRESO"')
+      const [rows] = await db.pool.execute('select * from OPERACIONES where TIPO_OPERACION="EGRESO" && ID_USUARIO= 1')
       return [rows]
   },
 }
