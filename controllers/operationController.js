@@ -12,7 +12,8 @@ module.exports = {
             }
     },
     getAll : async ( req,res,next) =>{
-        const data = await operationModel.getAll()
+        const id=23;
+        const data = await operationModel.getAll(id)
             res.json(data)   
     },
     getIngreso : async (req,res,next) =>{
@@ -36,6 +37,17 @@ module.exports = {
             console.log(e)
         }
     },
+    getByCategory : async (req,res,next) => {
+        const id = 23;
+        console.log(req.params.name)
+        try {
+            const response = await operationModel.getByCategory(id,req.params.name)
+            res.json({message : 'operacion exitosa',res:response})
+        } catch (error) {
+            res.json({message : "Hubo un error",err:error})
+        }
+        
+    }
 }
 
 
