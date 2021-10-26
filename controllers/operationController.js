@@ -3,7 +3,7 @@ const operationModel = require('../models/operationModel')
 
 module.exports = {
     create : async(req,res,next) =>{
-        const id=23 //token
+        const id=1 //token
         try{
             await operationModel.create(req.body,id)
             res.json({message : 'operacion exitosa',res:req.body})
@@ -12,7 +12,8 @@ module.exports = {
             }
     },
     getAll : async ( req,res,next) =>{
-        const data = await operationModel.getAll()
+        const id=1
+        const data = await operationModel.getAll(id)
             res.json(data)   
     },
     getIngreso : async (req,res,next) =>{

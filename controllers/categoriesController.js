@@ -4,11 +4,13 @@ const categoriesModel = require('../models/categoriesModel')
 module.exports = {
     getAll : async (req,res,next) =>{
         try {
+           // token =  console.log('headers',req.headers['token'])
             const categories = await categoriesModel.getAll()
             res.json({message : "Consulta exitosa",categorias : categories})
         }catch(e){
             res.json({message:"Hubo un error",type : e.code})
         };
+        
     },
     create : async(req,res,next) =>{
         try{

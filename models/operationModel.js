@@ -2,8 +2,8 @@ const db = require('../bin/database');
 
 module.exports = {
     getAll : async function (id) {
-      `select * from OPERACIONES WHERE ID_USUARIO==`
-      const [rows] = await db.pool.execute(`select * from OPERACIONES WHERE ID_USUARIO==${id}`)
+      
+      const [rows] = await db.pool.execute(`select * from OPERACIONES WHERE ID_USUARIO=${id}`)
         return [rows]
     }, 
     create : async (data,id) => {
