@@ -2,7 +2,10 @@ const db = require('../bin/database');
 
 module.exports = {
     getAll : async function (id) {
+<<<<<<< HEAD
       
+=======
+>>>>>>> 70fc54c1ba93e385d64cecdbbc57181e95a92629
       const [rows] = await db.pool.execute(`select * from OPERACIONES WHERE ID_USUARIO=${id}`)
         return [rows]
     }, 
@@ -25,10 +28,12 @@ module.exports = {
   },
      delete : async (id,userId) => {
       const query = await db.pool.query(`DELETE FROM OPERACIONES WHERE ID=${id} && ID_USUARIO=${userId}`) 
-        return query
-    
-      
+        return query 
 },
+    getByCategory : async(id,name) => {
+      const [rows] = await db.pool.execute(`select * from OPERACIONES where CATEGORIA_ID=${name} && ID_USUARIO=${id}`)
+        return [rows]
+    }
 }
 
 /*

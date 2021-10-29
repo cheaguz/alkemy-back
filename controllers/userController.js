@@ -13,7 +13,10 @@ module.exports = {
             });
             res.json({message: "usuario creado con exito!"})
         } catch (e) {
-            res.json({message: "Hubo un error",data: e.code})
+            if(e.code === "ER_DUP_ENTRY"){
+                res.json({message: "El usuario ya se encuentra registrado"})
+            }
+            
         }
     },
     login: async (req, res, next) => {
@@ -21,7 +24,7 @@ module.exports = {
             const user = await userModel.login(req.body)
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 const token = jwt.sign({user : user.mail,id : user.id },"123")
-                res.json({message: "Login exitoso", token:token,id : user.id})
+                res.json({message: "Login exitoso", token:token})
             } else {
                 res.json({message: "Usuario o contraseña erronea"})
             }
