@@ -27,14 +27,14 @@ module.exports = {
         res.json(response)
     },
     delete : async ( req, res, next) => {
-        const idOperation = 7;
-        const userId = 53 //token
-
+        const idOperation = req.params.id;
+        const userId = 23 //token
         try {
             const deleted = await operationModel.delete(idOperation , userId)
             res.json({message : "Deleted"})
         }catch(e){
             console.log(e)
+            next(e)
         }
     },
     getByCategory : async (req,res,next) => {

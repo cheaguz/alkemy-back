@@ -10,5 +10,5 @@ router.get('/ingreso' , operationController.getIngreso) //entry
 router.get('/egreso',operationController.getEgreso)     //egress
 router.get('/:name' , operationController.getByCategory)
 
-router.delete('/' , operationController.delete);
+router.delete('/:id' , operationController.delete);
 module.exports = router;
