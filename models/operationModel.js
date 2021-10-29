@@ -1,12 +1,9 @@
 const db = require('../bin/database');
-
+/*  INNER JOIN categorias on operaciones.CATEGORIA_ID = categorias.id  */ 
 module.exports = {
     getAll : async function (id) {
-<<<<<<< HEAD
-      
-=======
->>>>>>> 70fc54c1ba93e385d64cecdbbc57181e95a92629
-      const [rows] = await db.pool.execute(`select * from OPERACIONES WHERE ID_USUARIO=${id}`)
+      const [rows] = await db.pool.query(`SELECT * FROM operaciones WHERE ID_USUARIO=${id}`)
+      console.log(rows)
         return [rows]
     }, 
     create : async (data,id) => {
