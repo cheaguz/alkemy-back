@@ -15,10 +15,10 @@ module.exports = {
     create : async(req,res,next) =>{
         try{
             const newCategory = await categoriesModel.create(req.body)
-            console.log(newCategory)
-            res.json({message : "Categoria creada con exito"})
+            res.json({message : "Categoria creada con exito" , data : newCategory})
         }catch(e){
             res.json({message:"Hubo un error",type : e.code})
+            next(e)
         }
     },
     delete : async(req,res,next) => {

@@ -1,5 +1,4 @@
 const db = require('../bin/database');
-/*  INNER JOIN categorias on operaciones.CATEGORIA_ID = categorias.id  */ 
 module.exports = {
     getAll : async function (id) {
       const [rows] = await db.pool.query(`SELECT * FROM operaciones WHERE ID_USUARIO=${id}`)
@@ -30,13 +29,13 @@ module.exports = {
     getByCategory : async(id,name) => {
       const [rows] = await db.pool.execute(`select * from OPERACIONES where CATEGORIA_ID=${name} && ID_USUARIO=${id}`)
         return [rows]
+    },
+    update : async (id , data , ID_USUARIO) =>{
+      const {CONCEPTO , MONTO , CATEGORIA_ID} = data;
+      const update = await db.pool.execute(`UPDATE OPERACIONES SET CONCEPTO='${CONCEPTO}', MONTO = ${MONTO}, CATEGORIA_ID = ${CATEGORIA_ID} WHERE OPERACIONES.ID = ${id} && OPERACIONES.ID_USUARIO=${ID_USUARIO}`)
+      return update
     }
 }
 
-/*
- ELIMINAR OPERACION
- MODIFICAR OPERACION
-
-*/
 
 
